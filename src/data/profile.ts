@@ -1,11 +1,11 @@
 export const profile = {
-  name: "Eric",
+  name: "RANDRIANIRINA Harena Eric",
   brand: "ERIC.DEV",
   title: "Full Stack Developer | AI Engineering",
   description: "Étudiant en deuxième année d'informatique, passionné par le développement Full Stack, l'intelligence artificielle et la conception de solutions numériques innovantes.",
   objective: "Construire des applications web et mobiles utiles, développer des systèmes intelligents et transformer des idées ambitieuses en produits numériques fonctionnels.",
   location: "Antananarivo, Madagascar",
-  status: "Étudiant en L2 Informatique",
+  status: "Étudiant en L3 Informatique",
   goals: [
     "Trouver un stage en développement informatique.",
     "Développer des compétences avancées en Full Stack.",

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-@theme {
+:root {
+  color-scheme: dark;
   --color-background: #09090B;
   --color-background-secondary: #111114;
   --color-surface: #18181B;
@@ -8,6 +9,27 @@
   --color-text-secondary: #A1A1AA;
   --color-accent: #B7F7D4;
   --color-border: #27272A;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F9FAFB;
+  --color-surface: #F4F4F5;
+  --color-text-primary: #18181B;
+  --color-text-secondary: #52525B;
+  --color-accent: #22C55E;
+  --color-border: #E4E4E7;
+}
+
+@theme {
+  --color-background: var(--color-background);
+  --color-background-secondary: var(--color-background-secondary);
+  --color-surface: var(--color-surface);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-accent: var(--color-accent);
+  --color-border: var(--color-border);
 }
 
 * {
@@ -25,6 +47,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .font-mono {

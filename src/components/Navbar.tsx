@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { profile } from "../data/profile"
 import { Button } from "./Button"
+import { useTheme } from "../context/ThemeContext"
 
 const navLinks = [
   { name: "Accueil", href: "#accueil" },
@@ -15,6 +16,7 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
   
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +47,7 @@ export function Navbar() {
             {profile.brand}
           </a>
           
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -56,9 +58,13 @@ export function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-200 group-hover:w-full" />
               </a>
             ))}
-          </div>
-          
-          <div className="hidden md:block">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-text-secondary hover:text-text-primary transition-colors rounded-md hover:bg-surface"
+              aria-label="Basculer le thème"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <Button href="#contact" variant="secondary" size="sm">
               Me contacter
             </Button>
@@ -94,11 +100,21 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <div className="pt-3 border-t border-border">
-                <Button href="#contact" variant="secondary" size="sm" className="w-full" onClick={handleLinkClick}>
-                  Me contacter
-                </Button>
-              </div>
+            <div className="pt-3 border-t border-border space-y-3">
+              <button
+                onClick={() => {
+                  toggleTheme()
+                  handleLinkClick()
+                }}
+                className="flex items-center gap-2 w-full text-text-secondary hover:text-text-primary transition-colors py-2"
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === "dark" ? "Mode clair" : "Mode sombre"}
+              </button>
+              <Button href="#contact" variant="secondary" size="sm" className="w-full" onClick={handleLinkClick}>
+                Me contacter
+              </Button>
+            </div>
             </div>
           </motion.div>
         )}
