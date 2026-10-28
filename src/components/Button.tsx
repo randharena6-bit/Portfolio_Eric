@@ -1,5 +1,5 @@
+import type { ReactNode } from "react"
 import { cn } from "../lib/utils"
-import { ReactNode } from "react"
 
 interface ButtonProps {
   children: ReactNode
@@ -9,6 +9,7 @@ interface ButtonProps {
   onClick?: () => void
   className?: string
   type?: "button" | "submit" | "reset"
+  disabled?: boolean
 }
 
 export function Button({
@@ -19,6 +20,7 @@ export function Button({
   onClick,
   className,
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const baseStyles = "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none"
   
@@ -45,7 +47,7 @@ export function Button({
   }
   
   return (
-    <button type={type} className={classes} onClick={onClick}>
+    <button type={type} className={classes} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   )

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { SectionHeading } from "../components/SectionHeading"
 import { Button } from "../components/Button"
-import { Mail, Github, Linkedin, Send } from "lucide-react"
+import { Mail, GitBranch, Link2, Send } from "lucide-react"
 import { profile } from "../data/profile"
 
 export function Contact() {
@@ -48,7 +48,6 @@ export function Contact() {
     setIsSubmitting(true)
     setSubmitStatus("idle")
     
-    // Note: Frontend only form - requires backend/service integration
     setTimeout(() => {
       setIsSubmitting(false)
       setSubmitStatus("error")
@@ -65,8 +64,8 @@ export function Contact() {
   
   const contactLinks = [
     { name: "E-mail", icon: Mail, href: profile.contact.email ? `mailto:${profile.contact.email}` : null, value: profile.contact.email },
-    { name: "GitHub", icon: Github, href: profile.contact.github, value: profile.contact.github },
-    { name: "LinkedIn", icon: Linkedin, href: profile.contact.linkedin, value: profile.contact.linkedin },
+    { name: "GitHub", icon: GitBranch, href: profile.contact.github, value: profile.contact.github },
+    { name: "LinkedIn", icon: Link2, href: profile.contact.linkedin, value: profile.contact.linkedin },
   ]
   
   return (
@@ -212,9 +211,7 @@ export function Contact() {
               )}
               
               <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  "Envoi en cours..."
-                ) : (
+                {isSubmitting ? "Envoi en cours..." : (
                   <>
                     Envoyer le message
                     <Send className="w-4 h-4" />

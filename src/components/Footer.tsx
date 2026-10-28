@@ -1,5 +1,5 @@
 import { profile } from "../data/profile"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { GitBranch, Link2, Mail } from "lucide-react"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -25,7 +25,7 @@ export function Footer() {
                 className="text-text-secondary hover:text-accent transition-colors"
                 aria-label="GitHub"
               >
-                <Github className="w-5 h-5" />
+                <GitBranch className="w-5 h-5" />
               </a>
             )}
             {profile.contact.linkedin && (
@@ -36,7 +36,7 @@ export function Footer() {
                 className="text-text-secondary hover:text-accent transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Link2 className="w-5 h-5" />
               </a>
             )}
             {profile.contact.email && (

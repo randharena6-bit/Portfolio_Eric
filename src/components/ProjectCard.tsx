@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
-import { ExternalLink, Github, ArrowRight } from "lucide-react"
-import { Project } from "../data/projects"
+import { ExternalLink, GitBranch, ArrowRight } from "lucide-react"
+import type { Project } from "../data/projects"
 import { Button } from "./Button"
 
 interface ProjectCardProps {
@@ -72,7 +72,7 @@ export function ProjectCard({ project, onClick, featured = false }: ProjectCardP
           
           {project.githubUrl ? (
             <Button href={project.githubUrl} variant="ghost" size="sm" className="text-xs">
-              <Github className="w-3.5 h-3.5" />
+              <GitBranch className="w-3.5 h-3.5" />
               Code source
             </Button>
           ) : (
