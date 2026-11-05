@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { ArrowDown, Code2, Sparkles, Network } from "lucide-react"
 import { profile } from "../data/profile"
 import { Button } from "../components/Button"
+import { Helmet3D } from "../components/Helmet3D"
 
 export function Hero() {
   const titleLines = profile.heroTitle.split('\n')
@@ -80,8 +81,9 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative"
+            className="relative space-y-6"
           >
+            <Helmet3D />
             <div className="relative border border-border bg-surface rounded-lg p-8 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
               
