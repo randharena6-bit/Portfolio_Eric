@@ -1,4 +1,5 @@
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
+import type { PointerEvent } from "react"
 import { ExternalLink, GitBranch, ArrowRight } from "lucide-react"
 import type { Project } from "../data/projects"
 import { Button } from "./Button"
@@ -10,6 +11,21 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, onClick, featured = false }: ProjectCardProps) {
+  const reducedMotion = useReducedMotion()
+  const moveVisual = (event: PointerEvent<HTMLDivElement>) => {
+    if (reducedMotion || event.pointerType !== "mouse") return
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5
+    event.currentTarget.style.setProperty("--tilt-x", `${-y * 18}deg`)
+    event.currentTarget.style.setProperty("--tilt-y", `${x * 24}deg`)
+    event.currentTarget.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`)
+    event.currentTarget.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`)
+  }
+  const resetVisual = (event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--tilt-x", "0deg")
+    event.currentTarget.style.setProperty("--tilt-y", "0deg")
+  }
   const statusLabels = {
     "en-cours": "Projet en cours",
     "prototype": "Prototype",
@@ -28,6 +44,7 @@ export function ProjectCard({ project, onClick, featured = false }: ProjectCardP
         featured ? "md:col-span-2" : ""
       }`}
     >
+      <div className="project-visual" aria-hidden="true" onPointerMove={moveVisual} onPointerLeave={resetVisual}><div className="project-visual-grid" /><div className="project-glow" /><span className="project-index">{project.id === "mitandrina" ? "01" : project.id === "fullstack-app" ? "02" : project.id === "mobile-app" ? "03" : "04"} / PROJECT</span><div className="project-3d"><div className="project-ring project-ring-one" /><div className="project-ring project-ring-two" /><div className="project-shape"><span>✳</span></div><div className="project-satellite" /></div><span className="project-visual-label">{project.category.toUpperCase()} — EXPLORATION</span></div>
       <div className="p-6 md:p-8">
         <div className="flex items-start justify-between mb-4">
           <div>

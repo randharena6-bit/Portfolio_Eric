@@ -7,6 +7,7 @@ export function Journey() {
   return (
     <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
+        <div className="section-kicker">05 / PARCOURS <span>↘</span></div>
         <SectionHeading
           title={profile.journeyTitle}
         />

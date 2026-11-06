@@ -16,6 +16,7 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("#accueil")
   const { theme, toggleTheme } = useTheme()
   
   useEffect(() => {
@@ -26,6 +27,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
   
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActiveSection(`#${entry.target.id}`) })
+    }, { rootMargin: "-25% 0px -65% 0px" })
+    navLinks.forEach(link => { const section = document.querySelector(link.href); if (section) observer.observe(section) })
+    return () => observer.disconnect()
+  }, [])
+
   const handleLinkClick = () => {
     setIsMobileMenuOpen(false)
   }
@@ -42,9 +51,9 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           <a
             href="#accueil"
-            className="font-mono text-sm font-medium tracking-wide hover:text-accent transition-colors"
+            className="nav-brand font-mono text-sm font-medium tracking-wide hover:text-accent transition-colors"
           >
-            {profile.brand}
+            <span className="nav-brand-mark">✳</span>{profile.brand}
           </a>
           
           <div className="hidden md:flex items-center gap-6">
@@ -52,7 +61,8 @@ export function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors relative group"
+                aria-current={activeSection === link.href ? "location" : undefined}
+                className={`nav-link text-sm transition-colors relative group ${activeSection === link.href ? "is-active" : "text-text-secondary"}`}
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-200 group-hover:w-full" />
@@ -73,7 +83,8 @@ export function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-text-secondary hover:text-text-primary transition-colors"
-            aria-label="Menu"
+            aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

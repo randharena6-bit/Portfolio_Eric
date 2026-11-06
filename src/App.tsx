@@ -14,6 +14,9 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <div className="motion-marquee" aria-label="Développement web, intelligence artificielle et créativité">
+          <div className="motion-marquee-track" aria-hidden="true">{[0, 1].map(copy => <div className="motion-marquee-group" key={copy}><span>CRÉER</span><i>✳</i><span>EXPÉRIMENTER</span><i>✳</i><span>DÉVELOPPER</span><i>✳</i><span>IMAGINER</span><i>✳</i></div>)}</div>
+        </div>
         <Projects />
         <Skills />
         <Process />

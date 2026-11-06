@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { SectionHeading } from "../components/SectionHeading"
 import { User, BookOpen, Target, Lightbulb } from "lucide-react"
 import { profile } from "../data/profile"
+import portrait from "../images/WhatsApp Image 2026-10-19 at 10.29.45.jpeg"
 
 export function About() {
   const highlights = [
@@ -14,17 +15,18 @@ export function About() {
   return (
     <section id="apropos" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-background-secondary">
       <div className="max-w-6xl mx-auto">
+        <div className="section-kicker">04 / À PROPOS <span>↘</span></div>
         <SectionHeading
           title="Curieux par nature. Ingénieur en devenir."
         />
         
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="about-layout grid lg:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="about-copy space-y-6"
           >
             {profile.about.split('\n\n').map((paragraph, index) => (
               <p key={index} className="text-text-secondary leading-relaxed">
@@ -59,11 +61,12 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="border border-border bg-surface rounded-lg p-8 relative overflow-hidden">
+            <div className="about-profile border border-border bg-surface rounded-lg p-8 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/3 to-transparent" />
               <div className="relative">
-                <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/30 flex items-center justify-center">
-                  <span className="text-4xl font-semibold text-accent">E</span>
+                <div className="about-portrait">
+                  <img src={portrait} alt="Portrait de Harena Eric Randrianirina" loading="lazy" />
+                  <span className="about-portrait-label">ERIC / MADAGASCAR</span>
                 </div>
                 <div className="text-center">
                   <h3 className="text-xl font-semibold mb-2">{profile.name}</h3>
